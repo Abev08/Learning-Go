@@ -1,0 +1,1 @@
+Collection of smaller projects created while learning and exploring Go.

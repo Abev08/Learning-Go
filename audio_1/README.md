@@ -1,0 +1,1 @@
+I wanted to play sounds with different formats one after another using Go, so this test app was created.
