@@ -7,22 +7,45 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
+	"os"
 	"strings"
 
 	"golang.ngrok.com/ngrok"
 	"golang.ngrok.com/ngrok/config"
 )
 
-const NGROK_AUTHTOKEN string = "xxx_yyy"
-const NGROK_DOMAIN_ADDR string = "zzz.ngrok-free.app"
-
 func main() {
+	// Read token and domain address from secrets.txt file
+	var token, domain string
+	file, err := os.Open("secrets.txt")
+	if err != nil {
+		slog.Error("Error opening secrets file", "err", err)
+		return
+	}
+	var reader = bufio.NewReader(file)
+	var lineNum = 0
+	for {
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			break
+		}
+		switch lineNum {
+		case 0:
+			token = strings.TrimSpace(line)
+		case 1:
+			domain = strings.TrimSpace(line)
+		}
+		lineNum++
+	}
+	file.Close()
+
+	// Start ngrok tunnel
 	tunnel, err := ngrok.Listen(context.Background(),
 		// Random address
-		config.HTTPEndpoint(),
+		// config.HTTPEndpoint(),
 		// Predefined address
-		// config.HTTPEndpoint(config.WithDomain(NGROK_DOMAIN_ADDR)),
-		ngrok.WithAuthtoken(NGROK_AUTHTOKEN),
+		config.HTTPEndpoint(config.WithDomain(domain)),
+		ngrok.WithAuthtoken(token),
 	)
 	if err != nil {
 		slog.Error("Error creating ngrok tunnel", "err", err)
@@ -51,6 +74,9 @@ func main() {
 			}
 
 			slog.Info("New http request", "url", req.URL)
+			for h, v := range req.Header {
+				slog.Info("", "header", h, "value", v)
+			}
 
 			switch req.URL.String() {
 			case "/":
