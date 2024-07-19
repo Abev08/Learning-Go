@@ -10,7 +10,11 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var dbConn *sql.DB
+// Simple app that allows reading and storing data in single file database (SQLite database).
+// If the database file is not found, new file is created.
+// On Windows SQLite requires GCC to build: https://github.com/mattn/go-sqlite3?tab=readme-ov-file#windows
+
+var dbConn *sql.DB // Connection do SQLite database
 
 func main() {
 	var err error

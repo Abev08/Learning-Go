@@ -8,29 +8,36 @@ import (
 	"time"
 )
 
+// Simple CLI interface.
+// The app counts and prints the result to console.
+// Every 5 steps asks the user if it should continue.
+
 func main() {
-	var i int32 = 0
-	const sleep_dur = time.Millisecond * 1234
 	reader := bufio.NewReader(os.Stdin)
+	const sleep_dur = time.Millisecond * 1000 // Can also use time.Second
+	i := 0
 	for {
-		time.Sleep(sleep_dur)
-		fmt.Println(i)
 		i++
+		fmt.Println(i)
 
 		if i%5 == 0 {
-			fmt.Print("Continue?")
-			var text, err = reader.ReadString('\n')
+			// Every 5 steps, ask the user if the app should continue
+			fmt.Print("Continue? [y/n]")            // Ask the user
+			var text, err = reader.ReadString('\n') // Read to the line break
 			if err != nil {
+				// Check if the read was successful
 				fmt.Println(text, err)
 			} else {
-				var s string
-				_ =
-					strings.Trim(text, s)
-				if s == "0" {
+				// Trim whtie space characters and convert to lower case for comparasion
+				text = strings.Trim(text, "\r\n ") // Leading and trailing '\r', '\n' and ' ' will be removed
+				fmt.Printf("Received: %s\n", text)
+				text = strings.ToLower(text)
+				if text == "n" {
 					break
 				}
-				fmt.Printf("Received: %s\n", text)
 			}
 		}
+
+		time.Sleep(sleep_dur) // Slow down the loop
 	}
 }

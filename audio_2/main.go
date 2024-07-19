@@ -16,6 +16,11 @@ import (
 	"github.com/gopxl/beep/wav"
 )
 
+// Extension of audio_1 example.
+// Text To Speech data is received from StreamElements API and decoded to mp3 data.
+// The TTS data is in memory in []byte format.
+// Just like in audio_1 example the data can be combined with other audio data to create audio stream.
+
 func main() {
 	var err error
 	var format = beep.Format{SampleRate: 44100, NumChannels: 2, Precision: 2}

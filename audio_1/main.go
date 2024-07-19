@@ -13,6 +13,11 @@ import (
 	"github.com/orcaman/writerseeker"
 )
 
+// This app allows to play .wav and .mp3 files (and other supported by beep package).
+// It can play single file or combine multiple ones into new one.
+// Also it can save new combined audio data into file.
+// Every loaded file is converted into specified audio format.
+
 func main() {
 	// Required output format, every sample would get resampled to that format
 	var format = beep.Format{SampleRate: 44100, NumChannels: 2, Precision: 2}
@@ -21,10 +26,10 @@ func main() {
 	var stream1, stream2 beep.StreamSeekCloser
 	var stream1Format, stream2Format beep.Format
 
-	fmt.Printf("Output audio format:\n Sample rate: %d,\n Channels: %d,\n Precision: %d\n", format.SampleRate, format.NumChannels, format.Precision)
+	fmt.Printf("Output audio format:\n Sample rate: %d\n Channels: %d\n Precision: %d\n", format.SampleRate, format.NumChannels, format.Precision)
 	time.Sleep(time.Second)
 
-	// wav file
+	// Loading .wav file
 	audioFile1, err := os.Open("sounds/tone1.wav")
 	if err != nil {
 		slog.Error("Error when opening audio file", "Err", err)
@@ -38,7 +43,7 @@ func main() {
 		defer stream1.Close()
 	}
 
-	// mp3 file
+	// Loading .mp3 file
 	audioFile2, err := os.Open("sounds/flute.mp3")
 	if err != nil {
 		slog.Error("Error when opening audio file", "Err", err)
@@ -52,9 +57,10 @@ func main() {
 		defer stream2.Close()
 	}
 
+	// Initialization of output device
 	speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
 
-	// Using beep.Streamer
+	// Playing audio using beep.Streamer
 	{
 		fmt.Println("Playing using beep.Streamer")
 		var audioStream beep.Streamer
@@ -79,7 +85,7 @@ func main() {
 	}
 	time.Sleep(time.Second * 2)
 
-	// Using beep.Buffer
+	// Playing audio using beep.Buffer
 	{
 		fmt.Println("Playing using beep.Buffer")
 		var buf = beep.NewBuffer(format)
@@ -108,13 +114,11 @@ func main() {
 		err = wav.Encode(ws, buf.Streamer(0, buf.Len()), format)
 		if err != nil {
 			slog.Error("Error when writing data to memory buffer", "Err", err)
-		} else {
-			fmt.Println(ws)
 		}
 	}
 	time.Sleep(time.Second * 2)
 
-	// Using queue of streamers
+	// Playing audio using queue of streamers
 	{
 		fmt.Println("Playing using queue of streamers")
 		var streamers Queue

@@ -14,6 +14,10 @@ import (
 	"golang.ngrok.com/ngrok/config"
 )
 
+// Ngrok package allows to create TCP tunnels.
+// It allows to create public url to access locally hosted app.
+// The app uses code similar to http_server_1 example.
+
 func main() {
 	// Read token and domain address from secrets.txt file
 	var token, domain string
@@ -38,13 +42,16 @@ func main() {
 		lineNum++
 	}
 	file.Close()
+	if len(token) > 0 && len(domain) > 0 {
+		fmt.Println("Ngrok token and domain readed successfuly")
+	}
 
 	// Start ngrok tunnel
 	tunnel, err := ngrok.Listen(context.Background(),
 		// Random address
-		// config.HTTPEndpoint(),
+		config.HTTPEndpoint(),
 		// Predefined address
-		config.HTTPEndpoint(config.WithDomain(domain)),
+		// config.HTTPEndpoint(config.WithDomain(domain)),
 		ngrok.WithAuthtoken(token),
 	)
 	if err != nil {
@@ -74,9 +81,9 @@ func main() {
 			}
 
 			slog.Info("New http request", "url", req.URL)
-			for h, v := range req.Header {
-				slog.Info("", "header", h, "value", v)
-			}
+			// for h, v := range req.Header {
+			// 	slog.Info("", "header", h, "value", v)
+			// }
 
 			switch req.URL.String() {
 			case "/":

@@ -16,9 +16,16 @@ import (
 	"time"
 )
 
-const TWITCH_CLIENT_ID string = ""   // Twitch API bots client ID
-const TWITCH_CLIENT_PASS string = "" // Twitch API bots client password
-const TWITCH_REDIRECT_URI string = "http://localhost:3000"         // Twitch API bots redirect Uri
+// OAuth validation based on Twitch API.
+// The TwitchToken, TwitchTokenRefresh, TwitchTokenExpirationDate variables should be saved to file / database
+// after token refresh the file / database should be updated.
+// Using previous Token and TokenRefresh variables allows to update the token without user interference.
+// It mostly uses build in HTTP Client to send GET requests with requried data.
+// When user confirmation is needed, new browser window with provided url is opened.
+
+const TWITCH_CLIENT_ID string = ""                         // Twitch API bots client ID
+const TWITCH_CLIENT_PASS string = ""                       // Twitch API bots client password
+const TWITCH_REDIRECT_URI string = "http://localhost:3000" // Twitch API bots redirect Uri
 var TWITCH_SCOPES []string = []string{
 	"bits:read",                     // View Bits information for a channel
 	"channel:manage:redemptions",    // Manage Channel Points custom rewards and their redemptions on a channel
@@ -40,11 +47,6 @@ var TwitchToken, TwitchTokenRefresh string
 var TwitchTokenExpirationDate time.Time
 
 func main() {
-	// OAuth validation based on Twitch API
-	// The TwitchToken, TwitchTokenRefresh, TwitchTokenExpirationDate variables should be saved to file / database
-	// after token refresh the file / database should be updated.
-	// Using previous Token and TokenRefresh variables allows to update the token without user interference.
-
 	if len(TwitchToken) == 0 || len(TwitchTokenRefresh) == 0 {
 		getNewTwitchToken()
 	} else {

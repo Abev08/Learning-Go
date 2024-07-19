@@ -9,19 +9,28 @@ import (
 	"strings"
 )
 
+// App allows to create simple configuration file (.ini format).
+// Data from the config.ini file is parsed and can be used inside the app.
+// If the file is not found it creates new one.
+// Creation and parsing of data in config.ini file uses enum type.
+
+// Path to the config.ini file
 const CONFIG_FILE_PATH string = "config.ini"
 
 type Config uint16
 
 // Collection of config values
-var ConfigData = make(map[Config]string, SomethingElse+1) // Last variable + 1 provided as a size
+var ConfigData = make(map[Config]string, 0) // Last variable + 1 provided as capacity, it's not necessary to provide capacity
 
+// Configuration variable
 const (
 	Variable1 Config = iota
 	OtherVariable
 	SomethingElse
 )
 
+// Converts configuration variable to it's string representation.
+// Used in config.ini file data creation and parsing.
 func (c Config) ToString() string {
 	switch c {
 	case Variable1:
@@ -35,6 +44,7 @@ func (c Config) ToString() string {
 	}
 }
 
+// Parses string into configuration variable.
 // Pass '0' as first argumnet
 func (c Config) FromString(s string) (Config, error) {
 	switch s {
@@ -64,6 +74,7 @@ func main() {
 	parseConfigFile(file)
 }
 
+// Creates new config.ini file
 func createConfigFile(fileName string) (*os.File, error) {
 	var file, err = os.Create(fileName)
 	if err != nil {
@@ -77,13 +88,14 @@ func createConfigFile(fileName string) (*os.File, error) {
 	file.WriteString("\n")
 	file.WriteString(fmt.Sprintf("%s = a1\n", Variable1.ToString()))
 	file.WriteString("UnrecognizedVariable = b2\n")
-	file.WriteString(fmt.Sprintf("%s = c3\n", OtherVariable.ToString()))
+	file.WriteString(fmt.Sprintf("%s = c3 ; Inline comment\n", OtherVariable.ToString()))
 	file.WriteString("; DeprecatedVar2 = d4\n")
 	file.WriteString(fmt.Sprintf("%s = e5\n", SomethingElse.ToString()))
 
 	return os.Open(file.Name())
 }
 
+// Parses provided config.ini file
 func parseConfigFile(file *os.File) {
 	var reader = bufio.NewReader(file)
 
@@ -92,9 +104,7 @@ func parseConfigFile(file *os.File) {
 		if err != nil {
 			return
 		}
-		var s = strings.TrimSpace(string(data))
-		s = strings.TrimSuffix(s, "\r\n")
-		s = strings.TrimSuffix(s, "\n")
+		s := strings.Trim(string(data), "\r\n ") // Leading and trailing '\r', '\n' and ' ' will be removed
 
 		// Skip empty and commented out lines
 		if len(s) == 0 || strings.HasPrefix(s, "//") || strings.HasPrefix(s, ";") {
@@ -106,11 +116,12 @@ func parseConfigFile(file *os.File) {
 		var index = strings.Index(s, "=")
 		var v = strings.TrimSpace(s[:index])
 		var variable Config
-		variable, err = Config.FromString(0, v)
+		variable, err = Config.FromString(0, v) // Try to parse readed variable name
 		if err != nil {
 			slog.Warn("Variable not recognized", "Var", v)
 			continue
 		}
+		// Read the value, check for inline comment
 		var value = s[(index + 1):]
 		index = strings.Index(value, ";")
 		if index > 0 {

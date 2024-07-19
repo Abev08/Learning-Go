@@ -23,3 +23,5 @@ go.work
 
 # Additional ignores
 secrets.txt
+config.ini
+.db

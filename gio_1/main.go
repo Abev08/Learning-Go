@@ -15,6 +15,12 @@ import (
 	"gioui.org/widget/material"
 )
 
+// Very simple GUI app with Gio package.
+// Just a window with a text (label) and a button that you can click.
+// You can click the label and when it's detected message to console is printed.
+// Also the button is clickable and on clicks it increases a counter and prints a message to console.
+// Gio on Windows doesn't have external dependencies.
+
 func main() {
 	window := new(app.Window)
 
