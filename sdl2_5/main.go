@@ -24,7 +24,7 @@ func main() {
 	app := NewApp("Window", sdl.Point{X: 800, Y: 450})
 	defer app.Cleanup()
 
-	app.BackgrouundColor = sdl.Color{R: 40, G: 40, B: 40, A: 255}
+	app.BackgroundColor = sdl.Color{R: 40, G: 40, B: 40, A: 255}
 
 	// Load image and create texture from it
 	slimeImg, err := img.Load("assets/slime.png")
@@ -131,7 +131,7 @@ func main() {
 		}
 
 		// Drawing
-		app.R.SetDrawColor(app.BackgrouundColor.R, app.BackgrouundColor.G, app.BackgrouundColor.B, app.BackgrouundColor.A)
+		app.R.SetDrawColor(app.BackgroundColor.R, app.BackgroundColor.G, app.BackgroundColor.B, app.BackgroundColor.A)
 		app.R.Clear()
 
 		// Update animation
@@ -197,7 +197,7 @@ type App struct {
 	W                *sdl.Window   // Window
 	R                *sdl.Renderer // Renderer
 	WindowID         uint32
-	BackgrouundColor sdl.Color
+	BackgroundColor sdl.Color
 }
 
 // Cleans up after the app

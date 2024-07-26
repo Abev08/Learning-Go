@@ -31,8 +31,8 @@ func main() {
 	app2 := NewApp("Window 2", sdl.Point{X: 640, Y: 360})
 	defer app2.Cleanup()
 
-	app1.BackgrouundColor = randColor()
-	app2.BackgrouundColor = randColor()
+	app1.BackgroundColor = randColor()
+	app2.BackgroundColor = randColor()
 
 	running := true
 	updateColor := time.Now()
@@ -44,8 +44,8 @@ func main() {
 		// Update background color every second
 		if time.Since(updateColor).Milliseconds() >= 1000 {
 			updateColor = time.Now()
-			app1.BackgrouundColor = randColor()
-			app2.BackgrouundColor = randColor()
+			app1.BackgroundColor = randColor()
+			app2.BackgroundColor = randColor()
 		}
 
 		// Process events
@@ -80,7 +80,7 @@ func main() {
 		}
 
 		// Window 1 draw
-		app1.R.SetDrawColor(app1.BackgrouundColor.R, app1.BackgrouundColor.G, app1.BackgrouundColor.B, app1.BackgrouundColor.A)
+		app1.R.SetDrawColor(app1.BackgroundColor.R, app1.BackgroundColor.G, app1.BackgroundColor.B, app1.BackgroundColor.A)
 		app1.R.Clear()
 		if DrawButton(app1.R, app1.WindowID, &inputs, &b1Rect) {
 			b1Counter++
@@ -89,7 +89,7 @@ func main() {
 		app1.R.Present()
 
 		// Window 2 draw
-		app2.R.SetDrawColor(app2.BackgrouundColor.R, app2.BackgrouundColor.G, app2.BackgrouundColor.B, app2.BackgrouundColor.A)
+		app2.R.SetDrawColor(app2.BackgroundColor.R, app2.BackgroundColor.G, app2.BackgroundColor.B, app2.BackgroundColor.A)
 		app2.R.Clear()
 		if DrawButton(app2.R, app2.WindowID, &inputs, &b2Rect) {
 			b2Counter++
@@ -114,7 +114,7 @@ type App struct {
 	W                *sdl.Window   // Window
 	R                *sdl.Renderer // Renderer
 	WindowID         uint32
-	BackgrouundColor sdl.Color
+	BackgroundColor sdl.Color
 }
 
 // Cleans up after the app
