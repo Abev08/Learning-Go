@@ -17,10 +17,14 @@ Or you can follow these steps:
 1. Install GCC (described in the list above)  
 2. Download and extract SDL2 libraries  
    - Go to https://github.com/libsdl-org/SDL/releases
-   - Download SDL2-devel-[version]-mingw.zip - version should be the newest one
+   - Download ```SDL2-devel-[version]-mingw.zip```, version should be the newest one
    - Extract the downloaded package (or use .zip explorer like 7-zip)
    - Go to ```x86_64-w64-mingw32``` folder in downloaded package
    - Copy contents of the folder into ```C:\msys64\ucrt64\```
-3. Optional but highly recomended: repeat step 2 for [SDL2_ttf](https://github.com/libsdl-org/SDL_ttf/releases) and [SDL2_img](https://github.com/libsdl-org/SDL_image/releases)
+3. Optional but highly recomended: repeat step 2 for [SDL_ttf](https://github.com/libsdl-org/SDL_ttf/releases) and [SDL_img](https://github.com/libsdl-org/SDL_image/releases)
+4. When publishing an app with SDL2 libraries used you need to include runtime libraries (.dll files) with application .exe
+   - To include these libraries go to [SDL](https://github.com/libsdl-org/SDL/releases), [SDL_ttf](https://github.com/libsdl-org/SDL_ttf/releases) and [SDL_img](https://github.com/libsdl-org/SDL_image/releases)
+   - Download ```SDL2-[version]-win32-x64.zip```, ```SDL2_ttf-[version]-win32-x64.zip``` and ```SDL2_image-[version]-win32-x64.zip```
+   - Extract .dll files from downloaded packages and place them in a project folder
 
 Great tutorial series on creating games in Go: [Games With Go](https://www.youtube.com/watch?v=9D4yH7e_ea8&list=PLDZujg-VgQlZUy1iCqBbe5faZLMkA3g2x).
