@@ -25,6 +25,8 @@ Or you can follow these steps:
    - To include these libraries go to [SDL](https://github.com/libsdl-org/SDL/releases), [SDL_ttf](https://github.com/libsdl-org/SDL_ttf/releases) and [SDL_img](https://github.com/libsdl-org/SDL_image/releases)
    - Download ```SDL2-[version]-win32-x64.zip```, ```SDL2_ttf-[version]-win32-x64.zip``` and ```SDL2_image-[version]-win32-x64.zip```
    - Extract .dll files from downloaded packages and place them in a project folder
+
+Warning: First compilation after including SDL libraries may take long time!
 <br><br>
 
 ### Other stuff
