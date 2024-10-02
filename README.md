@@ -10,7 +10,7 @@ Collection of smaller projects created while learning and exploring Go.
 6. Restart the terminal and confirm that installation works with command: ```gcc --version```
 <br><br>
 
-### To use SDL2 with Go on Windows
+### Using SDL2 with Go on Windows
 There are few requirements to use SDL2 with Go. You can follow [veandco tutorial](https://github.com/veandco/go-sdl2?tab=readme-ov-file#requirements) how to get it working.  
 Or you can follow these steps:
 1. Install GCC (described in the list above)  
