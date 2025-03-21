@@ -1,4 +1,4 @@
-module sdl3_1
+module sdl3_2
 
 go 1.24.1
 
