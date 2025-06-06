@@ -8,7 +8,10 @@ Collection of smaller projects created while learning and exploring Go.
 4. Run the command: ```pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain```
 5. Add ```C:\msys64\ucrt64\bin``` to system path
 6. Restart the terminal and confirm that installation works with command: ```gcc --version```
-<br><br>
+
+> [!Note]
+> To update MSYS2, open ucrt64.exe and execute ```pacman -Suy```
+
 
 ### Using SDL2 with Go on Windows
 There are few requirements to use SDL2 with Go. You can follow [veandco tutorial](https://github.com/veandco/go-sdl2?tab=readme-ov-file#requirements) how to get it working.  
@@ -32,7 +35,6 @@ Or you can follow these steps:
 > [!Note]
 > First compilation after including SDL libraries may take long time!
 
-<br><br>
 
 ### Other stuff
 Great tutorial series on creating games in Go: [Games With Go](https://www.youtube.com/watch?v=9D4yH7e_ea8&list=PLDZujg-VgQlZUy1iCqBbe5faZLMkA3g2x)
