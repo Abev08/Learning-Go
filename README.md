@@ -26,7 +26,12 @@ Or you can follow these steps:
    - Download ```SDL2-[version]-win32-x64.zip```, ```SDL2_ttf-[version]-win32-x64.zip``` and ```SDL2_image-[version]-win32-x64.zip```
    - Extract .dll files from downloaded packages and place them in a project folder
 
-Warning: First compilation after including SDL libraries may take long time!
+> [!warning]
+> Using SDL2 with Go requires cgo. To enable it run ```go env -w CGO_ENABLED=1``` in the console.
+
+> [!Note]
+> First compilation after including SDL libraries may take long time!
+
 <br><br>
 
 ### Other stuff
