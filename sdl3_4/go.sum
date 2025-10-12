@@ -1,6 +1,12 @@
 github.com/ebitengine/purego v0.8.2 h1:jPPGWs2sZ1UgOSgD2bClL0MJIqu58nOmIcBuXr62z1I=
 github.com/ebitengine/purego v0.8.2/go.mod h1:iIjxzd6CiRiOG0UyXP+V1+jWqUXVjPKLAI0mRfJZTmQ=
+github.com/ebitengine/purego v0.9.0 h1:mh0zpKBIXDceC63hpvPuGLiJ8ZAa3DfrFTudmfi8A4k=
+github.com/ebitengine/purego v0.9.0/go.mod h1:iIjxzd6CiRiOG0UyXP+V1+jWqUXVjPKLAI0mRfJZTmQ=
 github.com/jupiterrider/purego-sdl3 v0.0.0-20250324184618-67ac2b3057d5 h1:Gmfu+1YX83hMdgSxsSAtMEB3n6tB73Eiz5rwtKwbTFQ=
 github.com/jupiterrider/purego-sdl3 v0.0.0-20250324184618-67ac2b3057d5/go.mod h1:bUv1BcdO0uvGAb0mT5PDSInh67TlbzXBBL4/vVwcEEs=
 github.com/jupiterrider/purego-sdl3 v0.0.0-20250331165459-320d4df1c9f3 h1:7YWZpB+/K8AAsVixF+PUnotznWxMTSeHvMemYg/EiGY=
 github.com/jupiterrider/purego-sdl3 v0.0.0-20250331165459-320d4df1c9f3/go.mod h1:bUv1BcdO0uvGAb0mT5PDSInh67TlbzXBBL4/vVwcEEs=
+github.com/jupiterrider/purego-sdl3 v0.0.0-20250830164339-0b819d2ac7fd h1:5A6bfDn+WEip5vyNm63K1JkWLBZYxHors3QO6Qs9dRg=
+github.com/jupiterrider/purego-sdl3 v0.0.0-20250830164339-0b819d2ac7fd/go.mod h1:pRSNvzaSfMxcVPHP5VKo5VF5SAFp78pPIGlBIoI8KBw=
+github.com/jupiterrider/purego-sdl3 v0.0.0-20251005105256-300a87fdcd1e h1:78g3HKF9jv+enXOV0fYclOlCXJnFfSCTSTjGi4wpNts=
+github.com/jupiterrider/purego-sdl3 v0.0.0-20251005105256-300a87fdcd1e/go.mod h1:pRSNvzaSfMxcVPHP5VKo5VF5SAFp78pPIGlBIoI8KBw=

@@ -51,10 +51,7 @@ func main() {
 	if !sdl.CreateWindowAndRenderer("Splines", 1280, 720, sdl.WindowResizable, &window.W, &window.R) {
 		log.Fatalln(sdl.GetError())
 	}
-
-	// FIXME SDL3 Go bindings are missing sdl.GetWindowID(), for now assume WindowID = 3
-	// window.ID = sdl.GetWindowID(w.W)
-	window.ID = 3
+	window.ID = sdl.GetWindowID(window.W)
 
 	// Enable VSync. This can be used any time after creating renderer, not like sdl.SetHint(sdl.HintRenderVsync, "1")
 	sdl.SetRenderVSync(window.R, 1) // 0 - off, 1 - vsync, 2 - vsync/2, 3 - vsync/3, 4 - vsync/4

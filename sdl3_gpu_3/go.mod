@@ -1,4 +1,4 @@
-module sdl3_2
+module sdl3_gpu_3
 
 go 1.25
 

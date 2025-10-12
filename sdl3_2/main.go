@@ -48,13 +48,10 @@ func main() {
 		log.Fatalln(sdl.GetError())
 	}
 
-	// FIXME SDL3 Go bindings are missing sdl.GetWindowID(), for now assume WindowID 3 and 4
-	// for i := range windows {
-	// 	w := &windows[i]
-	// 	w.ID = sdl.GetWindowID(w.W)
-	// }
-	windows[0].ID = 3
-	windows[1].ID = 4
+	for i := range windows {
+		w := &windows[i]
+		w.ID = sdl.GetWindowID(w.W)
+	}
 
 	// Enable VSync. This can be used any time after creating renderer, not like sdl.SetHint(sdl.HintRenderVsync, "1")
 	for i := range windows {
@@ -126,8 +123,7 @@ func main() {
 				for i := range windows {
 					w := &windows[i]
 					if e.WindowID == w.ID {
-						// FIXME SDL3 Go bindings are missing sdl.RaiseWindow()
-						// sdl.RaiseWindow(w.W)
+						sdl.RaiseWindow(w.W)
 					}
 				}
 			}
