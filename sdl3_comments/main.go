@@ -306,6 +306,12 @@ func AddStructComment(sb *strings.Builder, line string) {
 
 func AddConstComment(sb *strings.Builder, line string) {
 	fields := strings.Fields(line)
+	if len(line) == 0 || len(fields) < 1 {
+		// Empty comment
+		fmt.Fprintf(sb, "%s\n", line)
+		return
+	}
+
 	fieldName := strings.TrimPrefix(fields[0], "*")
 	// Add underscores before capital letters and numbers
 	previousWasANumber := false
